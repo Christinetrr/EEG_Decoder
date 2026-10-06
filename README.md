@@ -1,6 +1,6 @@
 # EEG Decoder
 
-Classifies left vs. right motor imagery from EEG using CSP + LDA
+Classifies left vs. right motor imagery from EEG using Common Spatial Pattern (CSP) + Linear Discriminant Analysis (LDA) 
 
 <img src="results/classification_dataset_2.png" width="400">
 
