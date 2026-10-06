@@ -16,7 +16,7 @@ from LDA import lda_fit, lda_predict
 # %% load data
 
 # other path AssignmentData02.mat
-session_file = "AssignmentData02.mat"  # load data
+session_file = "../data/AssignmentData02.mat"  # load data
 task = "LR"  # 1D Left/Right cursor control task
 mat = loadmat(session_file, squeeze_me=True, struct_as_record=False)
 BCI = mat["BCI"]
@@ -104,7 +104,7 @@ f_test = csp_transform(W, X_test)
 fig, (X_raw, X_csp) = plot_csp_feature_extraction(
     epochs=X_train, y=y_train, W=W, log_power=True  # CSP filters
 )
-fig.savefig("fig_train.png", dpi=300)  # save and report the figure
+fig.savefig("../results/fig_train.png", dpi=300)  # save and report the figure
 fig.show()
 # %% LDA
 w, b, c1, c2 = lda_fit(f_train, y_train, reg=1e-4)  # fit the classifier
@@ -122,5 +122,5 @@ print(
 fig, (X_raw, X_csp) = plot_csp_feature_extraction(
     epochs=X_test, y=y_test, W=W, log_power=True  # CSP filters
 )
-fig.savefig("fig_test.png", dpi=300)  # save and report the figure
+fig.savefig("../results/fig_test.png", dpi=300)  # save and report the figure
 fig.show()
