@@ -16,7 +16,7 @@ def lda_fit(X, y, reg=1e-4):
     # Pooled covariance
     S1 = np.cov(X1, rowvar=False)
     S2 = np.cov(X2, rowvar=False)
-    Sp = ?
+    Sp = (S1 + S2)/2
     # Regularize
     Sp += reg * np.eye(Sp.shape[0])
     # Solve for w = Σ^{-1}(μ2 - μ1)
@@ -26,7 +26,7 @@ def lda_fit(X, y, reg=1e-4):
     return w, float(b), c1, c2
 
 def lda_predict(w, b, c1, c2, X):
-    s = ? # score each sample based on the calculated class boundary
+    s = X @ w + b  # score each sample based on the calculated class boundary
     # Map sign of s to predicted labels
-    yhat = ?
+    yhat = [c2 if s > 0 else c1 for s in s]
     return yhat

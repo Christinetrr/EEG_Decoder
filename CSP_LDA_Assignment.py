@@ -50,7 +50,7 @@ online_preds = np.asarray(online_preds) # n_trials
 # %% preprocess
 
 # common average referencing
-trials = trials-trials.mean(axis=?, keepdims=True) # along which dimension we want to reference
+trials = trials-trials.mean(axis=1, keepdims=True) # along which dimension we want to reference
 
 # downsample
 downsrate = 100

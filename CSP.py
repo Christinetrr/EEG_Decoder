@@ -41,7 +41,7 @@ def csp_fit(class1_epochs, class2_epochs, reg=1e-6, m_pairs=3):
     Csumr = Csum + reg * scales * np.eye(n_ch)
 
     # Solve generalized eigenproblem C1 v = λ (C1 + C2) v
-    lam, V = eigh(?)   
+    lam, V = eigh(C1 + C2)   
 
     # goal of CSP: find filters that maximize the variance in one class while minimizing it in the other
     # the most discriminative filters have λ far from 0.5
@@ -49,7 +49,7 @@ def csp_fit(class1_epochs, class2_epochs, reg=1e-6, m_pairs=3):
     V = V[:, order]
 
     # Take top 2*m_pairs components
-    W = V[?]   # filters
+    W = V[:2, :2]   # filters
     return W
 
 
@@ -61,7 +61,7 @@ def csp_transform(W, epochs, log=True):
     """
     feats = []
     for e in epochs:
-        Z = ?         # Project epochs with CSP filters (n_comp, T)
+        Z = W.T @ e         # Project epochs with CSP filters (n_comp, T)
         p = (Z ** 2).mean(axis=1)  # average power
         if log: # log-transform (optional)
             p = np.log(p + 1e-12) 
